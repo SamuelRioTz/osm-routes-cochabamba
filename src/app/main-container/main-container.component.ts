@@ -18,15 +18,7 @@ export interface OSMRoute {
 })
 export class MainContainerComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'ref', 'from', 'to', 'state'];
-  routes: OSMRoute[] = [
-    {
-      id: "id",
-      name: "namenamenamenamenamenamenamenamenamenamenamename",
-      ref: "ref",
-      from: "from",
-      to: "to",
-    },
-  ];
+  routes: OSMRoute[] = [];
 
   constructor(service: OsmRoutesService) {
     console.log(service.osm_log)
