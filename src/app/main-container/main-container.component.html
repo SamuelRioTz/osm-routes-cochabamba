@@ -1,32 +1,39 @@
 <table mat-table [dataSource]="routes" class="mat-elevation-z8">
     <!-- Item Column -->
-    <ng-container matColumnDef="item">
-        <th mat-header-cell *matHeaderCellDef> Item </th>
-        <td mat-cell *matCellDef="let route"> {{route.id}} </td>
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let route"> 
+            <button mat-button color="primary">{{route.id}}</button> </td>
         <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
     <!-- Name Column -->
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let route"> {{route.name}} </td>
+        <td mat-cell *matCellDef="let route"> {{route.tags.name}} </td>
         <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
     <!-- Ref Column -->
     <ng-container matColumnDef="ref">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let route"> {{route.ref}} </td>
+        <th mat-header-cell *matHeaderCellDef> Ref </th>
+        <td mat-cell *matCellDef="let route"> {{route.tags.ref}} </td>
         <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
     <!-- From Column -->
     <ng-container matColumnDef="from">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let route"> {{route.from}} </td>
+        <th mat-header-cell *matHeaderCellDef> From </th>
+        <td mat-cell *matCellDef="let route"> {{route.tags.from}} </td>
         <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
     <!-- To Column -->
     <ng-container matColumnDef="to">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let route"> {{route.to}} </td>
+        <th mat-header-cell *matHeaderCellDef> To </th>
+        <td mat-cell *matCellDef="let route"> {{route.tags.to}} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <!-- State Column -->
+    <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef> State </th>
+        <td mat-cell *matCellDef="let route"> {{route.error?route.error.extractor_error:"correct"}} </td>
         <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 

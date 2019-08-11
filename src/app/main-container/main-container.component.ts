@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OsmRoutesService } from '../osm-routes.service';
 export interface Transaction {
   item: string;
   cost: number;
@@ -16,7 +17,7 @@ export interface OSMRoute {
   styleUrls: ['./main-container.component.css']
 })
 export class MainContainerComponent implements OnInit {
-  displayedColumns: string[] = ['item', 'name', 'ref', 'from', 'to'];
+  displayedColumns: string[] = ['id', 'name', 'ref', 'from', 'to', 'state'];
   routes: OSMRoute[] = [
     {
       id: "id",
@@ -26,6 +27,11 @@ export class MainContainerComponent implements OnInit {
       to: "to",
     },
   ];
+
+  constructor(service: OsmRoutesService) {
+    console.log(service.osm_log)
+    this.routes = service.osm_log
+  }
   ngOnInit() {
   }
 
