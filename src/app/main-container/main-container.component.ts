@@ -21,7 +21,6 @@ export class MainContainerComponent implements OnInit {
   routes: OSMRoute[] = [];
 
   constructor(service: OsmRoutesService) {
-    console.log(service.osm_log)
     this.routes = service.osm_log
   }
   ngOnInit() {
