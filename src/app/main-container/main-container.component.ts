@@ -34,5 +34,7 @@ export class MainContainerComponent implements OnInit {
   }
   ngOnInit() {
   }
-
+  openPage(id: string) {
+    window.open(`https://www.openstreetmap.org/relation/${id}`, '_blank');
+  }
 }
