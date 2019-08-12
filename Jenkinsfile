@@ -11,11 +11,10 @@ pipeline{
     }
     stage("Build"){
         agent{
-            label ' master'
+            label 'master'
         }
         steps{
             sh "docker build -t osm-routes ."
-            sh "docker run -it -p 80:80 --rm osm-routes"
         }
     }
 }
