@@ -10,20 +10,12 @@ pipeline{
         }
         stage("Build"){
             agent{
-                label 'master'
+                docker 'node:12.8.0-slim'
             }
+            environment { HOME="." }
             steps{
-                sh "docker build -t osm-routes ."
-                sh "docker save -o osm-routes.tar osm-routes"
-                stash name: "stash-artifact", includes: "dist/"
-
-            }
-        }
-        stage("Deployment QA"){
-            agent { label 'master' }
-            steps{
-                sh "docker rm osm-routes -f || true"
-                sh "docker run -d -p 81:80 --name  osm-routes osm-routes"
+                sh "npm i"
+                sh "npm run dist"
             }
         }
     }
