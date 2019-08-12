@@ -22,13 +22,27 @@ pipeline{
             agent { label ' master' }
             steps{
                 sh "docker build -t osm-routes ."
-                sh "docker save -o osm-routes.tar mauricio/blog"
+            }
+        }
+        stage("Stash"){            
+            agent { label ' master' }
+            steps{
+                sh "docker save -o osm-routes.tar osm-routes"
                 stash name: "stash-artifact", includes: "osm-routes.tar"
             }
         }
         stage("Deployment QA"){
             agent { label 'master' }
             steps{
+                sh "docker rm osm-routes -f || true"
+                sh "docker run -d -p 80:80 --name  osm-routes osm-routes"
+            }
+        }
+        stage("Deployment PROD"){
+            agent{label 'PROD'}
+            steps{
+                unstash "stash-artifact"
+                sh "docker load -i osm-routes.tar"
                 sh "docker rm osm-routes -f || true"
                 sh "docker run -d -p 80:80 --name  osm-routes osm-routes"
             }
