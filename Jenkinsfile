@@ -8,13 +8,13 @@ pipeline{
                 sh "echo Cloned!"
             }            
         }
-    }
-    stage("Build"){
-        agent{
-            label 'master'
-        }
-        steps{
-            sh "docker build -t osm-routes ."
+        stage("Build"){
+            agent{
+                label 'master'
+            }
+            steps{
+                sh "docker build -t osm-routes ."
+            }
         }
     }
 }
