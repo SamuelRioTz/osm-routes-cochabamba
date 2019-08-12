@@ -14,6 +14,9 @@ pipeline{
             }
             steps{
                 sh "docker build -t osm-routes ."
+                sh "docker save -o osm-routes.tar osm-routes"
+                stash name: "stash-artifact", includes: "dist/"
+
             }
         }
         stage("Deployment QA"){
