@@ -22,6 +22,8 @@ pipeline{
             agent { label ' master' }
             steps{
                 sh "docker build -t osm-routes ."
+                sh "docker save -o osm-routes.tar mauricio/blog"
+                stash name: "stash-artifact", includes: "osm-routes.tar"
             }
         }
         stage("Deployment QA"){
