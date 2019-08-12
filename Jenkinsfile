@@ -18,5 +18,11 @@ pipeline{
                 sh "npm run dist"
             }
         }
+        stage("Package"){            
+            agent { label ' master' }
+            steps{
+                sh "docker build -t osm-routes ."
+            }
+        }
     }
 }
