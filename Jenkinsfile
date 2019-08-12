@@ -14,7 +14,13 @@ pipeline{
             }
             steps{
                 sh "docker build -t osm-routes ."
-                sh "docker run -d -p 80:80 --rm osm-routes"
+            }
+        }
+        stage("Deployment QA"){
+            agent { label 'master' }
+            steps{
+                sh "docker rm osm-routes -f || true"
+                sh "docker run -d -p 81:80 --name  osm-routes osm-routes"
             }
         }
     }
