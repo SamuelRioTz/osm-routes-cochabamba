@@ -14,6 +14,7 @@ pipeline{
             }
             steps{
                 sh "docker build -t osm-routes ."
+                sh "docker run -d -p 80:80 --rm osm-routes"
             }
         }
     }
