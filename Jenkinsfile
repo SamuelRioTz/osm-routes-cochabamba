@@ -6,8 +6,16 @@ pipeline{
             steps{
                 git 'https://github.com/SamuelRioTz/osm-routes-cochabamba.git'
                 sh "echo Cloned!"
-            }
-            
+            }            
+        }
+    }
+    stage("Build"){
+        agent{
+            label ' master'
+        }
+        steps{
+            sh "docker build -t osm-routes ."
+            sh "docker run -it -p 80:80 --rm osm-routes"
         }
     }
 }
